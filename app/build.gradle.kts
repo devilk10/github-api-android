@@ -28,10 +28,6 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-            buildConfigField("String", "ApiKey", "\"${System.getenv("API_KEY_GITHUB")}\"")
-        }
-        debug {
-            buildConfigField("String", "ApiKey", "\"${System.getenv("API_KEY_GITHUB")}\"")
         }
     }
     compileOptions {
@@ -52,6 +48,13 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+    android {
+        testOptions {
+            unitTests {
+                isIncludeAndroidResources = true
+            }
+        }
+    }
 }
 
 dependencies {
@@ -64,7 +67,23 @@ dependencies {
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3")
+
+    //retrofit+gson
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    //image loading
+    implementation("io.coil-kt:coil-compose:1.4.0")
+    implementation("com.google.ar:core:1.39.0")
+
+    //mockk
+    testImplementation("io.mockk:mockk:1.12.4")
     testImplementation("junit:junit:4.13.2")
+    //For runBlockingTest, CoroutineDispatcher etc.
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.2")
+
+    testImplementation("org.robolectric:robolectric:4.7.3")
+    testImplementation("androidx.compose.ui:ui-test-junit4:1.5.0")
+
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     androidTestImplementation(platform("androidx.compose:compose-bom:2023.03.00"))

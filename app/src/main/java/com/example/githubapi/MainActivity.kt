@@ -9,7 +9,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.githubapi.ui.PullRequestPage
+import com.example.githubapi.ui.pullRequestList.PullRequestPage
 import com.example.githubapi.ui.theme.GithubApiTheme
 
 class MainActivity : ComponentActivity() {
@@ -22,7 +22,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    PullRequestPage()
+                    PullRequestPage(AppContainer().prViewModel)
                 }
             }
         }
@@ -33,6 +33,6 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun GreetingPreview() {
     GithubApiTheme {
-        PullRequestPage()
+        PullRequestPage(AppContainer().prViewModel)
     }
 }
